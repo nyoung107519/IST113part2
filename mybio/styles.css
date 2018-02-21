@@ -1,0 +1,87 @@
+
+body {
+  color: #ddeoe3;               
+  background-color: white;
+    font-size: 18px;
+}
+h1{
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-weight: normal; 
+    font-size: 1.6em;
+}
+h2{
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-weight: normal;  
+    font-size: 2em;
+}
+div{
+    margin: 20px auto;
+	width: 1000px;
+	text-align: center;
+	background-color: #b2d6ff;  
+}
+
+header{ 
+	text-align:center;
+	font-size: 40px;
+	 margin: 20px auto;
+	border: 1px solid black ;
+	
+}
+
+img {
+	width: 400px;	
+}
+
+.car1 {
+  font-style: normal;
+  color: #FFF;
+  margin: 0 auto;
+  border-radius: 5px;
+  border: 2px solid #5D6063; 
+  padding: 20px;
+} 
+
+.car3 {
+  font-style: normal;
+  color: #FFF;
+  margin: 0 auto;
+  border-radius: 5px;
+  border: 2px solid #5D6063; 
+  padding: 20px;
+}
+.car2 {
+  font-style: normal;
+  color: #FFF;
+  margin: 0 auto;
+  border-radius: 5px;
+  border: 2px solid #5D6063; 
+  padding: 20px;
+}
+
+.sidebar{ 
+float: right;
+margin: auto;
+width: auto;
+font-size:20px;
+border: 1px solid black;
+padding:10px;
+}
+
+
+
+.footer{
+	margin: 10px;
+	font-size: 40px;
+	text-align: center;
+	clear: both;
+	width: auto;  
+}
+
+.header{ 
+	text-align:center;
+	font-size: 40px;
+	 margin: 20px auto;
+	border: 1px solid black ;
+	
+}
