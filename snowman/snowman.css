@@ -1,0 +1,77 @@
+.sun{
+	color: yellow;
+	border: 1px solid black;
+	border-radius: 50%;
+	width:100px;
+	height:100px;
+	margin:auto;
+	float:left;
+}
+
+.sky{
+	
+	
+	
+	
+}
+
+
+.ground{
+	
+	
+	
+	
+}
+
+
+
+
+
+
+.s1{float: left;}
+.head{
+	border: 1px solid black;
+	border-radius: 50%;
+	width:200px;
+	height:200px;
+	margin:auto;
+}
+.body{
+	display: block;
+	border: 1px solid black;
+	border-radius: 50%;
+	width:300px;
+	height:300px;
+	margin:auto;
+}
+.feet{
+	border: 1px solid black;
+	border-radius: 50%;
+	width:400px;
+	height:400px;
+	margin:auto;
+}
+
+.s2{float: right;}
+.head2{
+	border: 1px solid black;
+	border-radius: 50%;
+	width:200px;
+	height:200px;
+	margin:auto;
+}
+.body2{
+	display: block;
+	border: 1px solid black;
+	border-radius: 50%;
+	width:300px;
+	height:300px;
+	margin:auto;
+}
+.feet2{
+	border: 1px solid black;
+	border-radius: 50%;
+	width:400px;
+	height:400px;
+	margin:auto;
+}
