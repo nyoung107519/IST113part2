@@ -1,0 +1,108 @@
+* {
+	margin:0 auto;
+}
+body 
+{
+	background-color:cyan;
+}
+
+.SnowmanBase 
+{
+	display:block solid;
+	width: 100px;
+	height: 100px;
+	border-radius:50px;
+	position:absolute;
+	background-color:white;
+	left:200px;
+	bottom:30px;
+	z-index: 1;
+	border: 1px solid black;
+}
+.SnowmanMiddle {
+	display:block solid;
+	width: 75px;
+	height: 75px;
+	border-radius:50px;
+	position:absolute;
+	background-color:white;
+	left:212px;
+	bottom:100px;
+	z-index: 2;
+	border: 1px solid black;
+}
+
+.SnowmanHead {
+	display:block solid;
+	width: 50px;
+	height: 50px;
+	border-radius:50px;
+	position:absolute;
+	background-color:white;
+	left:224px;
+	bottom:170px;
+	z-index: 3;
+	border: 1px solid black;
+}
+
+.SnowmanBase1 
+{
+	display:block solid;
+	width: 100px;
+	height: 100px;
+	border-radius:50px;
+	position:absolute;
+	background-color:white;
+	border: 1px solid black;
+	right:200px;
+	bottom:30px;
+	z-index: 1;
+}
+.SnowmanMiddle1 {
+	display:block solid;
+	width: 75px;
+	height: 75px;
+	border-radius:50px;
+	position:absolute;
+	background-color:white;
+	border: 1px solid black;
+	right:212px;
+	bottom:100px;
+	z-index: 2;
+}
+
+.SnowmanHead1 {
+	display:block solid;
+	width: 50px;
+	height: 50px;
+	border-radius:50px;
+	border: 1px solid black;
+	position:absolute;
+	background-color:white;
+	right:224px;
+	bottom:170px;
+	z-index: 3;
+}
+
+
+.BottomFrame 
+{
+	height:40px;
+	width:100%;
+	bottom:0px;
+	position: absolute;
+	background-color:green;
+}
+
+.Sun {
+
+	display:block solid;
+	width: 100px;
+	height: 100px;
+	border-radius:50px;
+	position:absolute;
+	background-color:yellow;
+	left: 200px;
+	bottom:500px;
+	z-index: 1;
+}
