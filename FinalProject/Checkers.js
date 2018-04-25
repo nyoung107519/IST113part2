@@ -1,4 +1,3 @@
-
 // ------ Constants ------ \\
 
 const EMPTY = 0;
@@ -35,7 +34,7 @@ const assetsToPreload = [
 var boardState = [];
 //Array for the board highlight mask
 var highlightMask = [];
-//Boolean for debouncing board clicks
+//Boolean for debouncing board clicks (will also be set true during AI turn)
 var clickDB = false;
 //Boolean for stopping any click events during game over, new game, or turn switch states
 var gameRunning = false;
@@ -110,10 +109,11 @@ function getValidMoves(x, y) {
 	if (tile == REDM || tile == REDK || tile == WHITEK) {
 		if (down1_1 == EMPTY) moves.push(['move', x+1, y+1]);
 		if (down2_1 == EMPTY) moves.push(['move', x-1, y+1]);
-	} else if (tile == WHITEM || tile == REDK || tile == WHITEK) {
+	} 
+	if (tile == WHITEM || tile == REDK || tile == WHITEK) {
 		if (up1_1 == EMPTY) moves.push(['move', x+1, y-1]);
 		if (up2_1 == EMPTY) moves.push(['move', x-1, y-1]);
-	} else alert("Something has gone horribly wrong"); // this should never happen
+	}
 	
 	//now check for jumps
 	
@@ -159,6 +159,7 @@ function getAllMovesForSide(side) {
 	for (let y=0;y<boardState.length;y++) {
 		for (let x=0;x<boardState[y].length;x++) {
 			let state = getState(x,y);
+			if (state == king) console.log("king");
 			if (state == man || state == king) {
 				let moveset = getValidMoves(x,y);
 				if (moveset != undefined) {
@@ -323,7 +324,7 @@ function getNumPieces(side) {
 	return n;
 }
 
-//Perform the provided move from the provided tile coordinates.
+//Perform the provided move from the provided tile coordinates
 function doMove(tx, ty, move) {
 	let tState = getState(tx, ty);
 	setState(tx, ty, EMPTY);
@@ -331,6 +332,21 @@ function doMove(tx, ty, move) {
 	if (move[0] == 'jump') {
 		setState(move[3], move[4], EMPTY);
 	}
+}
+
+//Check for kings of the provided side
+function checkKing(side) {
+	//Get side-specific info
+	let row = undefined;
+	if (side == SIDE_RED) row = boardState[boardState.length-1]; else row = boardState[0];
+	let man = side == SIDE_RED ? REDM : WHITEM;
+	let king = side == SIDE_RED ? REDK : WHITEK;
+	
+	for (let i in row) {
+		if (row[i] == man) row[i] = king;
+	}
+	//console.log(stringifyState())
+	drawBoard($("#board"));
 }
 
 //Called when a tile is clicked
@@ -360,12 +376,15 @@ function tileClicked(x,y) {
 		drawBoard($("#board"));
 		console.log("Tile has " + selectedTileMoves.length + " valid moves");
 	}
+
 	clickDB = false;
 }
 
 //After the current turn has ended, this method is called to start the next side's turn.
 function switchTurn() {
 	gameRunning = false;
+	//Check for kings created in the previous turn
+	checkKing(currentSide);
 	//Check for additional jump moves on current turn
 	if (jumpedOnce) {
 		currentMoves = getAllMovesForSide(currentSide);
@@ -375,6 +394,7 @@ function switchTurn() {
 		if (hasMoreJumps) {
 			console.log("Jump moves detected, " + currentMoves.length + " Jump(s) possible")
 			gameRunning = true;
+			updateInterface();
 			return;
 		}
 		jumpedOnce = false;
@@ -383,10 +403,11 @@ function switchTurn() {
 	currentSide = currentSide == SIDE_RED ? SIDE_WHITE : SIDE_RED; // This will prefer red over white (as currentSide starts as undefined)
 	console.log(sideString(currentSide) + "'s turn");
 	currentMoves = getAllMovesForSide(currentSide);
-	if (currentMoves == undefined || currentMoves.length < 1) {gameOver(SIDE_RED ? SIDE_WHITE : SIDE_RED); return;}
+	if (currentMoves == undefined || currentMoves.length < 1) {gameOver(currentSide == SIDE_RED ? SIDE_WHITE : SIDE_RED); return;}
 	let hasJump = jumpCheck(currentMoves);
 	if (hasJump) jumpedOnce = true;
 	console.log(hasJump ? ("Jump moves detected, " + currentMoves.length + " Jump(s) possible") : (currentMoves.length + " Move(s) possible"));
+	updateInterface();
 	gameRunning = true;
 }
 
@@ -394,14 +415,27 @@ function switchTurn() {
 function gameOver(winner) {
 	gameRunning = false;
 	console.log(sideString(winner) + " has won the game");
+	updateInterface();
 }
 //Called when the 'new game' button is clicked
 function newGame() {
-	
+	updateInterface();
 }
 
 //Used to update the interface with current game information
 function updateInterface() {
+	let turnObj = $("#turnIndicator");
+	if (currentSide == SIDE_WHITE) {
+		turnObj.css("background", "linear-gradient(to right, lightgreen 50%, transparent 50%)");
+	} else {
+		turnObj.css("background", "linear-gradient(to left, lightgreen 50%, transparent 50%)");
+	}
+	
+	
+}
+
+//Execute an AI turn for the provided side
+function doAITurn(side) {
 	
 }
 
@@ -409,7 +443,9 @@ $(function(){
 	preloadAssets();
 	boardState = newPopulatedBoardArray(8,8,3);
 	drawBoard($("#board"));
+	updateInterface();
 	switchTurn();
+	$("#newGameButton").on("click", newGame);
 })
 
 
@@ -422,5 +458,9 @@ $(function(){
 
 
 
+
+
+
+//This is the most-documented piece of code I have ever written.
 
 
