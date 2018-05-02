@@ -462,5 +462,3 @@ $(function(){
 
 
 //This is the most-documented piece of code I have ever written.
-
-
